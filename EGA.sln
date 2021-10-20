@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloMethod", "MonteCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravellingSalesmanProblem", "TravellingSalesmanProblem\TravellingSalesmanProblem.csproj", "{8BE3117C-E946-4DAB-96BE-504AE52C8C11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackProblem", "KnapsackProblem\KnapsackProblem.csproj", "{45E2600E-4252-4318-BDA2-EBB0139C6797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8BE3117C-E946-4DAB-96BE-504AE52C8C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE3117C-E946-4DAB-96BE-504AE52C8C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE3117C-E946-4DAB-96BE-504AE52C8C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E2600E-4252-4318-BDA2-EBB0139C6797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E2600E-4252-4318-BDA2-EBB0139C6797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E2600E-4252-4318-BDA2-EBB0139C6797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E2600E-4252-4318-BDA2-EBB0139C6797}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
