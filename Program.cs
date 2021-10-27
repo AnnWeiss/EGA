@@ -31,7 +31,17 @@ namespace EGA
                 candidateList.Add(objCand);
             }
 
-            Console.WriteLine("Кодировки созданы! Введите количество проверок кандидата: ");
+            Console.WriteLine("Кодировки созданы! Созданный ландшафт: ");
+            Console.WriteLine();
+            for (int i = 0; i < landscape; i++)
+            {
+                Console.Write(string.Join("", candidateList[i].encoding));
+                Console.Write(" ");
+                Console.Write(string.Join("", candidateList[i].fitness));
+                Console.Write("\n");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Введите количество проверок кандидата: ");
             int N = int.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.WriteLine("------------------");
