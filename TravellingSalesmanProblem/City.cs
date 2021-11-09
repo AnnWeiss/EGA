@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace TravellingSalesmanProblem
 {
@@ -15,6 +11,10 @@ namespace TravellingSalesmanProblem
         {
             X = x;
             Y = y;
+        }
+        public City()
+        {
+
         }
     }
 }
