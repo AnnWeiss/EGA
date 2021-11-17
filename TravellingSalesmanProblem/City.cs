@@ -2,7 +2,7 @@
 
 namespace TravellingSalesmanProblem
 {
-    class City
+    public class City
     {
         public bool wasVisited { get; set; }
         public int X { get; set; }

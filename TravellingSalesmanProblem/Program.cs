@@ -8,11 +8,8 @@ namespace TravellingSalesmanProblem
         static void Main(string[] args)
         {
             var citiesList = new List<City>();
-            Random rnd = new Random();
+            
             //double[,] Matrix = new double[5, 5];
-            var Path = new List<int>();
-            double totalDistance = 0;
-
             /*City city0 = new City(10, 5);
             citiesList.Add(city0);
             City city1 = new City(30, 15);
@@ -54,50 +51,93 @@ namespace TravellingSalesmanProblem
                 City city = new City();
                 citiesList.Add(city);
             }
-            nearestNeighborsMethod(citiesList);
-
-            void nearestNeighborsMethod(List<City> citieslist)
+            nearestNeighborsMethod(citiesList, Matrix2);
+        }
+        static int returnRandomNumber(int Maxvalue)
+        {
+            int value;
+            Random rnd = new Random();
+            value = rnd.Next(0, Maxvalue);
+            return value;
+        }
+        static void nearestNeighborsMethod(List<City> citieslist, double[,] Matrix)
+        {
+            var Path = new List<int>();
+            double totalDistance = 0;
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("Метод ближайшего соседа");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+            Console.WriteLine("Матрица расстояний городов:");
+            Console.WriteLine();
+            for (int i = 0; i < citieslist.Count; i++)
             {
-                Console.WriteLine("-----------------------");
-                Console.WriteLine("Метод ближайшего соседа");
-                Console.WriteLine("-----------------------");
-                Console.WriteLine();
-                Console.WriteLine("Матрица расстояний городов:");
-                Console.WriteLine();
-                for (int i = 0; i < 15; i++)
+                Console.Write("{0,-7} ", i);
+            }
+            Console.Write("\n");
+            for (int i = 0; i < citieslist.Count; i++)
+            {
+                Console.Write("{0,-7} ", "_");
+            }
+            Console.Write("\n");
+            Console.WriteLine();
+            for (int i = 0; i < citieslist.Count; i++)
+            {
+                for (int j = 0; j < citieslist.Count; j++)
                 {
-                    Console.Write("{0,-7} ", i);
+                    Console.Write("{0,-7} ", Matrix[i, j]);
+                }
+                Console.Write("{0,-7} ", "| " + i + " город");
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+            int Exit = 1;
+            while (Exit == 1)
+            {
+                int selectedCity = returnRandomNumber(Maxvalue:15);
+                citieslist[selectedCity].wasVisited = true;
+                int step = 0;
+                Console.WriteLine("Номер шага: " + step);
+                Console.WriteLine();
+                Console.WriteLine("Первый случайно выбранный город: " + selectedCity);
+                Console.Write("Начало пути: ");
+                Path.Add(selectedCity);
+                for (int i = 0; i < Path.Count; i++)
+                {
+                    Console.Write(Path[i] + " ");
                 }
                 Console.Write("\n");
-                for (int i = 0; i < 15; i++)
-                {
-                    Console.Write("{0,-7} ", "_");
-                }
-                Console.Write("\n");
-                Console.WriteLine();
-                for (int i = 0; i < 15; i++)
-                {
-                    for (int j = 0; j < 15; j++)
-                    {
-                        Console.Write("{0,-7} ", Matrix2[i, j]);
-                    }
-                    Console.Write("{0,-7} ", "| " + i + " город");
-                    Console.WriteLine();
-                }
                 Console.WriteLine();
                 Console.WriteLine("-----------------------");
                 Console.WriteLine();
-                int Exit = 1;
-                while (Exit == 1)
+                step++;
+
+                while (step < citieslist.Count)
                 {
-                    int selectedCity = rnd.Next(0, 15);//выбор 1 случайного города
-                    citiesList[selectedCity].wasVisited = true;
-                    int step = 0;
+                    int nearestCity = -1;
+                    double minDist = 999;
                     Console.WriteLine("Номер шага: " + step);
                     Console.WriteLine();
-                    Console.WriteLine("Первый случайно выбранный город: " + selectedCity);
-                    Console.Write("Начало пути: ");
-                    Path.Add(selectedCity);
+                    for (int i = selectedCity; i < selectedCity + 1; i++)
+                    {
+                        for (int j = 0; j < 15; j++)//просматриваем расстояния от выбранного до других
+                        {
+                            if (Matrix[i, j] < minDist && !citieslist[j].wasVisited)
+                            {
+                                minDist = Matrix[i, j];
+                                nearestCity = j;
+                            }
+                        }
+                    }
+                    totalDistance += minDist;
+                    citieslist[nearestCity].wasVisited = true;
+                    Console.WriteLine("Ближайший город: " + nearestCity);
+                    Console.WriteLine("Расстояние от текущего города " + selectedCity + " до ближайшего " + nearestCity + ": " + minDist);
+                    Console.WriteLine("Общее расстояние: " + totalDistance);
+                    Path.Add(nearestCity);
+                    Console.Write("Пройденный путь: ");
                     for (int i = 0; i < Path.Count; i++)
                     {
                         Console.Write(Path[i] + " ");
@@ -106,53 +146,18 @@ namespace TravellingSalesmanProblem
                     Console.WriteLine();
                     Console.WriteLine("-----------------------");
                     Console.WriteLine();
+                    selectedCity = nearestCity;
                     step++;
-
-                    while (step < citiesList.Count)
-                    {
-                        int nearestCity = -1;
-                        double minDist = 999;
-                        Console.WriteLine("Номер шага: " + step);
-                        Console.WriteLine();
-                        for (int i = selectedCity; i < selectedCity + 1; i++)
-                        {
-                            for (int j = 0; j < 15; j++)//просматриваем расстояния от выбранного до других
-                            {
-                                if (Matrix2[i, j] < minDist && !citiesList[j].wasVisited)
-                                {
-                                    minDist = Matrix2[i, j];
-                                    nearestCity = j;
-                                }
-                            }
-                        }
-                        totalDistance += minDist;
-                        citiesList[nearestCity].wasVisited = true;
-                        Console.WriteLine("Ближайший город: " + nearestCity);
-                        Console.WriteLine("Расстояние от текущего города " + selectedCity + " до ближайшего " + nearestCity + ": " + minDist);
-                        Console.WriteLine("Общее расстояние: " + totalDistance);
-                        Path.Add(nearestCity);
-                        Console.Write("Пройденный путь: ");
-                        for (int i = 0; i < Path.Count; i++)
-                        {
-                            Console.Write(Path[i] + " ");
-                        }
-                        Console.Write("\n");
-                        Console.WriteLine();
-                        Console.WriteLine("-----------------------");
-                        Console.WriteLine();
-                        selectedCity = nearestCity;
-                        step++;
-                    }
-                    for (int i = 0; i < citiesList.Count; i++)
-                    {
-                        citiesList[i].wasVisited = false; //сброс флагов
-                    }
-                    totalDistance = 0; //сброс дистанции
-                    Path.Clear();
-                    Console.WriteLine("Для повтора программы нажмите 1, для выхода нажмите 0: ");
-                    Exit = int.Parse(Console.ReadLine());
-                    Console.WriteLine();
                 }
+                for (int i = 0; i < citieslist.Count; i++)
+                {
+                    citieslist[i].wasVisited = false; //сброс флагов
+                }
+                totalDistance = 0; //сброс дистанции
+                Path.Clear();
+                Console.WriteLine("Для повтора программы нажмите 1, для выхода нажмите 0: ");
+                Exit = int.Parse(Console.ReadLine());
+                Console.WriteLine();
             }
         }
         static double calcCityDistance(City A, City B)

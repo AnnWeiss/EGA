@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravellingSalesmanProblem;
+using EGA;
 
 namespace EvolutionaryGeneticAlgorithm
 {
@@ -15,6 +17,14 @@ namespace EvolutionaryGeneticAlgorithm
         public Form1()
         {
             InitializeComponent();
+        }
+        public void CodingSolutions()//кодирование решений
+        {
+
+        }
+        public void GeneratePopulation()//создание начальной популяции
+        {
+
         }
     }
 }

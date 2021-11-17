@@ -2,7 +2,7 @@
 
 namespace EGA
 {
-    class Candidate
+    public class Candidate
     {
         public int[] encoding; //кодировка
         public int fitness; //приспособленность

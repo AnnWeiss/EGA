@@ -76,5 +76,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonteCarloMethod.csproj">
+      <Project>{f1f4a81c-9c1f-40e4-8e50-69453e605978}</Project>
+      <Name>MonteCarloMethod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravellingSalesmanProblem\TravellingSalesmanProblem.csproj">
+      <Project>{8be3117c-e946-4dab-96be-504ae52c8c11}</Project>
+      <Name>TravellingSalesmanProblem</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
