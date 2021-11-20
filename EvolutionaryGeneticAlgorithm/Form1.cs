@@ -15,6 +15,7 @@ namespace EvolutionaryGeneticAlgorithm
     {
         public Random rnd = new Random();
         public List<City> citiesList = new List<City>();
+        public List<Candidate> candidateList = new List<Candidate>();
         public double[,] Matrix2 = new double[15, 15]
         {
                 {0.00, 6.08, 11.00, 10.20, 9.22, 10.05, 12.37, 13.89, 12.17, 3.16, 5.10, 7.07, 13.42, 13.60, 1.41},
@@ -39,13 +40,12 @@ namespace EvolutionaryGeneticAlgorithm
         }
         public void CodingSolutions(int val)//кодирование решений
         {
-            var candidateList = new List<Candidate>();
             for (int i = 0; i < 15; i++)
             {
                 City city = new City();
                 citiesList.Add(city);
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 15; i++)
             {
                 Candidate objCand = new Candidate();
                 if(val == 1)
@@ -56,23 +56,58 @@ namespace EvolutionaryGeneticAlgorithm
                 {
                     objCand.encoding2 = MyLibrary.nearestCityMethod(citiesList, Matrix2, rnd);
                 }
-                objCand.fitness = rnd.Next(11); //задается случайная приспособленность
+                objCand.fitness = rnd.Next(1,16); //задается случайная приспособленность
                 candidateList.Add(objCand);
             }
         }
-        public void GeneratePopulation()//создание начальной популяции
+        /*public void GeneratePopulation()//создание начальной популяции
         {
 
+        }*/
+        public void printPopulationToListBox(List<Candidate> candList)
+        {
+            listBox1.Items.Add("Начальная популяция");
+            listBox1.Items.Add("Кодировки и приспособленность:");
+            for (int i = 0; i < candList.Count; i++)
+            {
+                listBox1.Items.Add(string.Join(" ", candList[i].encoding2)+"\t"+ string.Join(" ", candList[i].fitness));
+            }
+        }
+        private void nearestNeighborRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+            {
+                CodingSolutions(1);
+            }
+            printPopulationToListBox(candidateList);
+            nearestCityRadioButton.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void nearestCityRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            CodingSolutions(1);
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+            {
+                CodingSolutions(2);
+            }
+            printPopulationToListBox(candidateList);
+            nearestNeighborRadioButton.Enabled = false;
+        }
+        public void resetAll()
+        {
+            citiesList.Clear();
+            candidateList.Clear();
+            nearestCityRadioButton.Checked = false;
+            nearestNeighborRadioButton.Checked = false;
+            nearestNeighborRadioButton.Enabled = true;
+            nearestCityRadioButton.Enabled = true;
+            listBox1.Items.Clear();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void resetAllButton_Click(object sender, EventArgs e)
         {
-            CodingSolutions(2);
+            resetAll();
         }
     }
 }
