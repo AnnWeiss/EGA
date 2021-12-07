@@ -24,24 +24,49 @@ namespace MyProj
     }
     public class Candidate
     {
-        public int[] encoding; //кодировка для М-М-К
         public List<int> encoding2; //кодировка для задачи ЗК
         public int fitness; //приспособленность
-        public Candidate(int arrCount)
-        {
-            encoding = new int[arrCount];
-        }
-        public Candidate(List<int> encode)
-        {
-            encoding2 = encode;
-        }
         public Candidate()
         {
-
+            encoding2 = new List<int>();
         }
     }
     public static class MyLibrary
     {
+        public static Candidate OX(Candidate child, List<Candidate> candidatesList, Random rnd)
+        {
+            int firstParent = rnd.Next(0, 15);
+            int secondParent = rnd.Next(0, 15);
+            int section = rnd.Next(2, 15);
+            for (int i = 0; i <= section; i++)//копирование элементов из 1 родителя
+            {
+                child.encoding2.Add(candidatesList[firstParent].encoding2[i]);
+            }
+
+            for (int i = section + 1; i < candidatesList[secondParent].encoding2.Count; i++)//копирование из 2 родителя
+            {
+                if (child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                {
+                    continue;
+                }
+                else
+                {
+                    child.encoding2.Add(candidatesList[secondParent].encoding2[i]);
+                }
+            }
+            for (int i = 0; i <= section; i++)//копирование из 2 родителя
+            {
+                if (child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                {
+                    continue;
+                }
+                else
+                {
+                    child.encoding2.Add(candidatesList[secondParent].encoding2[i]);
+                }
+            }
+            return child;
+        }
         public static List<int> nearestCityMethod(List<City> citieslist, double[,] Matrix, Random rnd)
         {
             var Path = new List<int>();//итоговая кодировка

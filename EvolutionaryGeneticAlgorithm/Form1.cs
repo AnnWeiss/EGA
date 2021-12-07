@@ -16,6 +16,7 @@ namespace EvolutionaryGeneticAlgorithm
         public Random rnd = new Random();
         public List<City> citiesList = new List<City>();
         public List<Candidate> candidateList = new List<Candidate>();
+        public List<Candidate> candidateList2 = new List<Candidate>();
         public double[,] Matrix2 = new double[15, 15]
         {
                 {0.00, 6.08, 11.00, 10.20, 9.22, 10.05, 12.37, 13.89, 12.17, 3.16, 5.10, 7.07, 13.42, 13.60, 1.41},
@@ -38,7 +39,7 @@ namespace EvolutionaryGeneticAlgorithm
         {
             InitializeComponent();
         }
-        public void CodingSolutions(int val)//кодирование решений
+        public void CodingSolutions()//кодирование решений
         {
             for (int i = 0; i < 15; i++)
             {
@@ -48,11 +49,11 @@ namespace EvolutionaryGeneticAlgorithm
             for (int i = 0; i < 15; i++)
             {
                 Candidate objCand = new Candidate();
-                if(val == 1)
+                if(nearestNeighborRadioButton.Checked)
                 {
                     objCand.encoding2 = MyLibrary.nearestNeighborsMethod(citiesList, Matrix2, rnd);
                 }
-                if (val == 2)
+                if (nearestCityRadioButton.Checked)
                 {
                     objCand.encoding2 = MyLibrary.nearestCityMethod(citiesList, Matrix2, rnd);
                 }
@@ -60,13 +61,27 @@ namespace EvolutionaryGeneticAlgorithm
                 candidateList.Add(objCand);
             }
         }
-        /*public void GeneratePopulation()//создание начальной популяции
+        public void Crossover()
         {
+            for (int i = 0; i < 15; i++)
+            {
+                Candidate objCand = new Candidate();//создаем пустых особей
+                candidateList2.Add(objCand);
+            }
+            if (OXradioButton.Checked)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    candidateList2[i] = MyLibrary.OX(candidateList2[i],candidateList, rnd);
+                }
+            }
+            if (PMXradioButton.Checked)
+            {
 
-        }*/
+            }
+        }
         public void printPopulationToListBox(List<Candidate> candList)
         {
-            listBox1.Items.Add("Начальная популяция");
             listBox1.Items.Add("Кодировки и приспособленность:");
             for (int i = 0; i < candList.Count; i++)
             {
@@ -75,39 +90,45 @@ namespace EvolutionaryGeneticAlgorithm
         }
         private void nearestNeighborRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-            {
-                CodingSolutions(1);
-            }
-            printPopulationToListBox(candidateList);
-            nearestCityRadioButton.Enabled = false;
+
         }
 
         private void nearestCityRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-            {
-                CodingSolutions(2);
-            }
-            printPopulationToListBox(candidateList);
-            nearestNeighborRadioButton.Enabled = false;
+
         }
         public void resetAll()
         {
             citiesList.Clear();
             candidateList.Clear();
+            candidateList2.Clear();
             nearestCityRadioButton.Checked = false;
             nearestNeighborRadioButton.Checked = false;
-            nearestNeighborRadioButton.Enabled = true;
-            nearestCityRadioButton.Enabled = true;
+            OXradioButton.Checked = false;
             listBox1.Items.Clear();
         }
 
         private void resetAllButton_Click(object sender, EventArgs e)
         {
             resetAll();
+        }
+
+        private void OXradioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RMXradioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Createbutton_Click(object sender, EventArgs e)
+        {
+            CodingSolutions();
+            printPopulationToListBox(candidateList);
+            Crossover();
+            printPopulationToListBox(candidateList2);
         }
     }
 }
