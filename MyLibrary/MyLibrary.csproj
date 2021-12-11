@@ -44,11 +44,5 @@
     <Compile Include="MyLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TravellingSalesmanProblem\TravellingSalesmanProblem.csproj">
-      <Project>{8be3117c-e946-4dab-96be-504ae52c8c11}</Project>
-      <Name>TravellingSalesmanProblem</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

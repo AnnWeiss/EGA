@@ -39,7 +39,7 @@ namespace EvolutionaryGeneticAlgorithm
         {
             InitializeComponent();
         }
-        public void CodingSolutions()//кодирование решений
+        public void codingSolutions()//кодирование решений
         {
             for (int i = 0; i < 15; i++)
             {
@@ -61,23 +61,47 @@ namespace EvolutionaryGeneticAlgorithm
                 candidateList.Add(objCand);
             }
         }
-        public void Crossover()
+        public void crossover()
         {
             for (int i = 0; i < 15; i++)
             {
                 Candidate objCand = new Candidate();//создаем пустых особей
+                for (int j = 0; j < 15; j++)
+                {
+                    objCand.encoding2.Add(-1);
+                }
                 candidateList2.Add(objCand);
             }
             if (OXradioButton.Checked)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    candidateList2[i] = MyLibrary.OX(candidateList2[i],candidateList, rnd);
+                    candidateList2[i] = MyLibrary.crossOX(candidateList2[i],candidateList, rnd);
                 }
             }
             if (PMXradioButton.Checked)
             {
-
+                for (int i = 0; i < 15; i++)
+                {
+                    candidateList2[i] = MyLibrary.crossPMX(candidateList2[i], candidateList, rnd);
+                }
+            }
+        }
+        public void mutation()
+        {
+            if (genRadioButton.Checked)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    candidateList2[i] = MyLibrary.genMutation(candidateList2[i], rnd);
+                }
+            }
+            if (macroRadioButton.Checked)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    candidateList2[i] = MyLibrary.macroMutation(candidateList2[i], rnd);
+                }
             }
         }
         public void printPopulationToListBox(List<Candidate> candList)
@@ -105,6 +129,9 @@ namespace EvolutionaryGeneticAlgorithm
             nearestCityRadioButton.Checked = false;
             nearestNeighborRadioButton.Checked = false;
             OXradioButton.Checked = false;
+            PMXradioButton.Checked = false;
+            genRadioButton.Checked = false;
+            macroRadioButton.Checked = false;
             listBox1.Items.Clear();
         }
 
@@ -125,10 +152,22 @@ namespace EvolutionaryGeneticAlgorithm
 
         private void Createbutton_Click(object sender, EventArgs e)
         {
-            CodingSolutions();
+            codingSolutions();
             printPopulationToListBox(candidateList);
-            Crossover();
+            crossover();
             printPopulationToListBox(candidateList2);
+            mutation();
+            printPopulationToListBox(candidateList2);
+        }
+
+        private void genRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void macroRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TravellingSalesmanProblem;
 
 namespace MyProj
 {
     public class City
     {
         public bool wasVisited { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public City(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
         public City()
         {
 
@@ -33,37 +25,170 @@ namespace MyProj
     }
     public static class MyLibrary
     {
-        public static Candidate OX(Candidate child, List<Candidate> candidatesList, Random rnd)
+        public static Candidate macroMutation(Candidate candidate, Random rnd)
+        {
+            int firstidx = rnd.Next(0, 13);
+            int secondidx = rnd.Next(firstidx + 2, 15);
+            candidate.encoding2[firstidx] = candidate.encoding2[firstidx] + candidate.encoding2[secondidx];
+            candidate.encoding2[secondidx] = candidate.encoding2[firstidx] - candidate.encoding2[secondidx];
+            candidate.encoding2[firstidx] = candidate.encoding2[firstidx] - candidate.encoding2[secondidx];
+            return candidate;
+        }
+        public static Candidate genMutation(Candidate candidate, Random rnd)
+        {
+            int firstidx = rnd.Next(0, 14);
+            int secondidx = firstidx + 1;
+            candidate.encoding2[firstidx] = candidate.encoding2[firstidx] + candidate.encoding2[secondidx];
+            candidate.encoding2[secondidx] = candidate.encoding2[firstidx] - candidate.encoding2[secondidx];
+            candidate.encoding2[firstidx] = candidate.encoding2[firstidx] - candidate.encoding2[secondidx];
+            return candidate;
+        }
+        public static Candidate crossPMX(Candidate child, List<Candidate> candidatesList, Random rnd)
         {
             int firstParent = rnd.Next(0, 15);
             int secondParent = rnd.Next(0, 15);
-            int section = rnd.Next(2, 15);
-            for (int i = 0; i <= section; i++)//копирование элементов из 1 родителя
+            int firstSection = rnd.Next(1, 13);
+            int secondSection = rnd.Next(firstSection, 14);
+            List<int> firstblock = new List<int>();//таблица отображений
+            List<int> secondblock = new List<int>();//таблица отображений
+            List<int> fillerblock = new List<int>();
+            //копирование секции из 1 родителя
+            for (int i = firstSection; i <= secondSection; i++)
             {
-                child.encoding2.Add(candidatesList[firstParent].encoding2[i]);
+                child.encoding2[i] = candidatesList[firstParent].encoding2[i];
+                firstblock.Add(candidatesList[firstParent].encoding2[i]);
+                secondblock.Add(candidatesList[secondParent].encoding2[i]);
             }
-
-            for (int i = section + 1; i < candidatesList[secondParent].encoding2.Count; i++)//копирование из 2 родителя
+            for (int i = 0; i < secondblock.Count; i++)
             {
-                if (child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                if (firstblock.Contains(secondblock[i]))
                 {
-                    continue;
-                }
-                else
-                {
-                    child.encoding2.Add(candidatesList[secondParent].encoding2[i]);
+                    while (firstblock.Contains(secondblock[i]))
+                    {
+                        int numberFromFirst = secondblock[i];
+                        var indexOfElementFromFirstblock = firstblock.IndexOf(numberFromFirst);
+                        int numberFromSecond = secondblock[indexOfElementFromFirstblock];
+                        secondblock[i] = numberFromSecond;
+                        if(numberFromFirst == numberFromSecond)
+                        {
+                            break;
+                        }
+                    }
                 }
             }
-            for (int i = 0; i <= section; i++)//копирование из 2 родителя
+            //заполнение fillerblock
+            for (int i = secondSection + 1; i < candidatesList[secondParent].encoding2.Count; i++)
             {
-                if (child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                if (!firstblock.Contains(candidatesList[secondParent].encoding2[i]))//не входит в блок
                 {
-                    continue;
+                    if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                    {
+                        fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                    }
                 }
-                else
+                else//входит в блок
                 {
-                    child.encoding2.Add(candidatesList[secondParent].encoding2[i]);
+                    int index = firstblock.IndexOf(candidatesList[secondParent].encoding2[i]);
+                    if (!child.encoding2.Contains(secondblock[index]))
+                    {
+                        fillerblock.Add(secondblock[index]);
+                    }
                 }
+            }
+            //
+            for (int i = 0; i < firstSection; i++)
+            {
+                if (!firstblock.Contains(candidatesList[secondParent].encoding2[i]))//не входит в блок
+                {
+                    if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                    {
+                        fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                    }
+                }
+                else//входит в блок
+                {
+                    int index = firstblock.IndexOf(candidatesList[secondParent].encoding2[i]);
+                    if (!child.encoding2.Contains(secondblock[index]))
+                    {
+                        fillerblock.Add(secondblock[index]);
+                    }
+                }
+            }
+            for (int i = firstSection; i <= secondSection; i++)
+            {
+                if (!firstblock.Contains(candidatesList[secondParent].encoding2[i]))//не входит в блок
+                {
+                    if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                    {
+                        fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                    }
+                }
+                else//входит в блок
+                {
+                    int index = firstblock.IndexOf(candidatesList[secondParent].encoding2[i]);
+                    if (!child.encoding2.Contains(secondblock[index]))
+                    {
+                        fillerblock.Add(secondblock[index]);
+                    }
+                }
+            }
+            //заполнение потомка из fillerblock
+            for (int i = secondSection + 1; i < child.encoding2.Count; i++)
+            {
+                child.encoding2[i] = fillerblock[0];
+                fillerblock.RemoveAt(0);
+            }
+            for (int i = 0; i < firstSection; i++)
+            {
+                child.encoding2[i] = fillerblock[0];
+                fillerblock.RemoveAt(0);
+            }
+            return child;
+        }
+        public static Candidate crossOX(Candidate child, List<Candidate> candidatesList, Random rnd)
+        {
+            int firstParent = rnd.Next(0, 15);
+            int secondParent = rnd.Next(0, 15);
+            int firstSection = rnd.Next(1, 13);
+            int secondSection = rnd.Next(firstSection, 14);
+            List<int> fillerblock = new List<int>();
+            //копирование секции из 1 родителя
+            for (int i = firstSection; i <= secondSection; i++)
+            {
+                child.encoding2[i] = candidatesList[firstParent].encoding2[i];
+            }
+            //заполнение fillerblock
+            for (int i = secondSection + 1; i < candidatesList[secondParent].encoding2.Count; i++)
+            {
+                if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                {
+                    fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                }
+            }
+            for (int i = 0; i < firstSection; i++)
+            {
+                if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                {
+                    fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                }
+            }
+            for (int i = firstSection; i <= secondSection; i++)
+            {
+                if (!child.encoding2.Contains(candidatesList[secondParent].encoding2[i]))
+                {
+                    fillerblock.Add(candidatesList[secondParent].encoding2[i]);
+                }
+            }
+            //заполнение потомка из fillerblock
+            for (int i = secondSection + 1; i < child.encoding2.Count; i++)
+            {
+                child.encoding2[i] = fillerblock[0];
+                fillerblock.RemoveAt(0);
+            }
+            for (int i = 0; i < firstSection; i++)
+            {
+                child.encoding2[i] = fillerblock[0];
+                fillerblock.RemoveAt(0);
             }
             return child;
         }
