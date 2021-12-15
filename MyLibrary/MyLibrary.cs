@@ -17,14 +17,64 @@ namespace MyProj
     public class Candidate
     {
         public List<int> encoding2; //кодировка для задачи ЗК
+        public double totalDistance;
         public int fitness; //приспособленность
         public Candidate()
         {
             encoding2 = new List<int>();
         }
+        public void setDistance(double[,] Matrix)
+        {
+            if (encoding2.Count < 2)
+            {
+                throw new Exception("Ошибка алгоритма");
+            }
+            for (int i = 1; i < encoding2.Count; i++)
+            {
+                double dist = Matrix[encoding2[i], encoding2[i-1]];
+                totalDistance += dist;
+            }
+        }
     }
     public static class MyLibrary
     {
+        public static Candidate proportionalTournament(List<Candidate> candidatesList, Random rnd, List<Candidate> alreadyAddedCandidates)
+        {
+            Candidate bestCandidate = new Candidate();
+            return bestCandidate;
+        }
+        public static Candidate betaTournament(List<Candidate> candidatesList, Random rnd, List<Candidate> alreadyAddedCandidates)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int d = rnd.Next(1, candidatesList.Count);
+                if (!alreadyAddedCandidates.Contains(candidatesList[d]))
+                {
+                    alreadyAddedCandidates.Add(candidatesList[d]);
+                }
+                else
+                {
+                    while (alreadyAddedCandidates.Contains(candidatesList[d]))
+                    {
+                        d = rnd.Next(1, candidatesList.Count);
+                    }
+                    alreadyAddedCandidates.Add(candidatesList[d]);
+                }
+            }
+            //выбор лучшего из трех
+            Candidate bestCandidate = new Candidate();
+            bestCandidate = alreadyAddedCandidates[0];
+            for (int i = 1; i < alreadyAddedCandidates.Count; i++)
+            {
+                if (alreadyAddedCandidates[i].fitness > bestCandidate.fitness)
+                {
+                    bestCandidate = alreadyAddedCandidates[i];
+                }
+            }
+            candidatesList.Remove(bestCandidate);
+            alreadyAddedCandidates.Clear();
+            return bestCandidate;
+        }
         public static Candidate macroMutation(Candidate candidate, Random rnd)
         {
             int firstidx = rnd.Next(0, 13);
@@ -45,10 +95,10 @@ namespace MyProj
         }
         public static Candidate crossPMX(Candidate child, List<Candidate> candidatesList, Random rnd)
         {
-            int firstParent = rnd.Next(0, 15);
-            int secondParent = rnd.Next(0, 15);
-            int firstSection = rnd.Next(1, 13);
-            int secondSection = rnd.Next(firstSection, 14);
+            int firstParent = rnd.Next(0, candidatesList.Count);
+            int secondParent = rnd.Next(0, candidatesList.Count);
+            int firstSection = rnd.Next(1, candidatesList.Count-2);
+            int secondSection = rnd.Next(firstSection, candidatesList.Count-1);
             List<int> firstblock = new List<int>();//таблица отображений
             List<int> secondblock = new List<int>();//таблица отображений
             List<int> fillerblock = new List<int>();
@@ -95,7 +145,6 @@ namespace MyProj
                     }
                 }
             }
-            //
             for (int i = 0; i < firstSection; i++)
             {
                 if (!firstblock.Contains(candidatesList[secondParent].encoding2[i]))//не входит в блок
@@ -147,10 +196,10 @@ namespace MyProj
         }
         public static Candidate crossOX(Candidate child, List<Candidate> candidatesList, Random rnd)
         {
-            int firstParent = rnd.Next(0, 15);
-            int secondParent = rnd.Next(0, 15);
-            int firstSection = rnd.Next(1, 13);
-            int secondSection = rnd.Next(firstSection, 14);
+            int firstParent = rnd.Next(0, candidatesList.Count);
+            int secondParent = rnd.Next(0, candidatesList.Count);
+            int firstSection = rnd.Next(1, candidatesList.Count-2);
+            int secondSection = rnd.Next(firstSection, candidatesList.Count-1);
             List<int> fillerblock = new List<int>();
             //копирование секции из 1 родителя
             for (int i = firstSection; i <= secondSection; i++)

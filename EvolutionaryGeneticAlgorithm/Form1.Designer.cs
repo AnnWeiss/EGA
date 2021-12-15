@@ -30,7 +30,12 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.selectionGroupBox = new System.Windows.Forms.GroupBox();
+            this.proportionalRadioButton = new System.Windows.Forms.RadioButton();
+            this.betaRadioButton = new System.Windows.Forms.RadioButton();
             this.mutationGroupBox = new System.Windows.Forms.GroupBox();
+            this.macroRadioButton = new System.Windows.Forms.RadioButton();
+            this.genRadioButton = new System.Windows.Forms.RadioButton();
             this.Createbutton = new System.Windows.Forms.Button();
             this.resetAllButton = new System.Windows.Forms.Button();
             this.crossoverGroupBox = new System.Windows.Forms.GroupBox();
@@ -39,19 +44,17 @@
             this.populationGroupBox = new System.Windows.Forms.GroupBox();
             this.nearestCityRadioButton = new System.Windows.Forms.RadioButton();
             this.nearestNeighborRadioButton = new System.Windows.Forms.RadioButton();
-            this.genRadioButton = new System.Windows.Forms.RadioButton();
-            this.macroRadioButton = new System.Windows.Forms.RadioButton();
-            this.selectionGroupBox = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.chromRadioButton = new System.Windows.Forms.RadioButton();
+            this.countLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.selectionGroupBox.SuspendLayout();
             this.mutationGroupBox.SuspendLayout();
             this.crossoverGroupBox.SuspendLayout();
             this.populationGroupBox.SuspendLayout();
-            this.selectionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -70,13 +73,15 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.countLabel);
             this.splitContainer1.Panel2.Controls.Add(this.selectionGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.mutationGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.Createbutton);
             this.splitContainer1.Panel2.Controls.Add(this.resetAllButton);
             this.splitContainer1.Panel2.Controls.Add(this.crossoverGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.populationGroupBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1206, 888);
+            this.splitContainer1.Size = new System.Drawing.Size(1206, 1011);
             this.splitContainer1.SplitterDistance = 812;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -87,25 +92,88 @@
             this.listBox1.ItemHeight = 26;
             this.listBox1.Location = new System.Drawing.Point(10, 24);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(783, 810);
+            this.listBox1.Size = new System.Drawing.Size(783, 914);
             this.listBox1.TabIndex = 0;
+            // 
+            // selectionGroupBox
+            // 
+            this.selectionGroupBox.Controls.Add(this.proportionalRadioButton);
+            this.selectionGroupBox.Controls.Add(this.betaRadioButton);
+            this.selectionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.selectionGroupBox.Location = new System.Drawing.Point(29, 605);
+            this.selectionGroupBox.Name = "selectionGroupBox";
+            this.selectionGroupBox.Size = new System.Drawing.Size(327, 141);
+            this.selectionGroupBox.TabIndex = 8;
+            this.selectionGroupBox.TabStop = false;
+            this.selectionGroupBox.Text = "Селекция:";
+            // 
+            // proportionalRadioButton
+            // 
+            this.proportionalRadioButton.AutoSize = true;
+            this.proportionalRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.proportionalRadioButton.Location = new System.Drawing.Point(67, 91);
+            this.proportionalRadioButton.Name = "proportionalRadioButton";
+            this.proportionalRadioButton.Size = new System.Drawing.Size(198, 26);
+            this.proportionalRadioButton.TabIndex = 1;
+            this.proportionalRadioButton.TabStop = true;
+            this.proportionalRadioButton.Text = "Пропорциональная";
+            this.proportionalRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // betaRadioButton
+            // 
+            this.betaRadioButton.AutoSize = true;
+            this.betaRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.betaRadioButton.Location = new System.Drawing.Point(67, 41);
+            this.betaRadioButton.Name = "betaRadioButton";
+            this.betaRadioButton.Size = new System.Drawing.Size(108, 26);
+            this.betaRadioButton.TabIndex = 0;
+            this.betaRadioButton.TabStop = true;
+            this.betaRadioButton.Text = "β-турнир";
+            this.betaRadioButton.UseVisualStyleBackColor = true;
             // 
             // mutationGroupBox
             // 
+            this.mutationGroupBox.Controls.Add(this.chromRadioButton);
             this.mutationGroupBox.Controls.Add(this.macroRadioButton);
             this.mutationGroupBox.Controls.Add(this.genRadioButton);
             this.mutationGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mutationGroupBox.Location = new System.Drawing.Point(29, 381);
             this.mutationGroupBox.Name = "mutationGroupBox";
-            this.mutationGroupBox.Size = new System.Drawing.Size(327, 141);
+            this.mutationGroupBox.Size = new System.Drawing.Size(327, 196);
             this.mutationGroupBox.TabIndex = 7;
             this.mutationGroupBox.TabStop = false;
             this.mutationGroupBox.Text = "Мутация:";
             // 
+            // macroRadioButton
+            // 
+            this.macroRadioButton.AutoSize = true;
+            this.macroRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.macroRadioButton.Location = new System.Drawing.Point(67, 90);
+            this.macroRadioButton.Name = "macroRadioButton";
+            this.macroRadioButton.Size = new System.Drawing.Size(192, 26);
+            this.macroRadioButton.TabIndex = 1;
+            this.macroRadioButton.TabStop = true;
+            this.macroRadioButton.Text = "Макро (сальтация)";
+            this.macroRadioButton.UseVisualStyleBackColor = true;
+            this.macroRadioButton.CheckedChanged += new System.EventHandler(this.macroRadioButton_CheckedChanged);
+            // 
+            // genRadioButton
+            // 
+            this.genRadioButton.AutoSize = true;
+            this.genRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.genRadioButton.Location = new System.Drawing.Point(67, 37);
+            this.genRadioButton.Name = "genRadioButton";
+            this.genRadioButton.Size = new System.Drawing.Size(190, 26);
+            this.genRadioButton.TabIndex = 0;
+            this.genRadioButton.TabStop = true;
+            this.genRadioButton.Text = "Генная (точечная)";
+            this.genRadioButton.UseVisualStyleBackColor = true;
+            this.genRadioButton.CheckedChanged += new System.EventHandler(this.genRadioButton_CheckedChanged);
+            // 
             // Createbutton
             // 
             this.Createbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Createbutton.Location = new System.Drawing.Point(126, 718);
+            this.Createbutton.Location = new System.Drawing.Point(126, 847);
             this.Createbutton.Name = "Createbutton";
             this.Createbutton.Size = new System.Drawing.Size(143, 56);
             this.Createbutton.TabIndex = 6;
@@ -116,7 +184,7 @@
             // resetAllButton
             // 
             this.resetAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.resetAllButton.Location = new System.Drawing.Point(125, 794);
+            this.resetAllButton.Location = new System.Drawing.Point(126, 919);
             this.resetAllButton.Name = "resetAllButton";
             this.resetAllButton.Size = new System.Drawing.Size(143, 66);
             this.resetAllButton.TabIndex = 5;
@@ -200,89 +268,56 @@
             this.nearestNeighborRadioButton.UseVisualStyleBackColor = true;
             this.nearestNeighborRadioButton.CheckedChanged += new System.EventHandler(this.nearestNeighborRadioButton_CheckedChanged);
             // 
-            // genRadioButton
+            // chromRadioButton
             // 
-            this.genRadioButton.AutoSize = true;
-            this.genRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.genRadioButton.Location = new System.Drawing.Point(67, 37);
-            this.genRadioButton.Name = "genRadioButton";
-            this.genRadioButton.Size = new System.Drawing.Size(190, 26);
-            this.genRadioButton.TabIndex = 0;
-            this.genRadioButton.TabStop = true;
-            this.genRadioButton.Text = "Генная (точечная)";
-            this.genRadioButton.UseVisualStyleBackColor = true;
-            this.genRadioButton.CheckedChanged += new System.EventHandler(this.genRadioButton_CheckedChanged);
+            this.chromRadioButton.AutoSize = true;
+            this.chromRadioButton.Location = new System.Drawing.Point(67, 143);
+            this.chromRadioButton.Name = "chromRadioButton";
+            this.chromRadioButton.Size = new System.Drawing.Size(217, 26);
+            this.chromRadioButton.TabIndex = 2;
+            this.chromRadioButton.TabStop = true;
+            this.chromRadioButton.Text = "Хромосомная (м.Б.С)";
+            this.chromRadioButton.UseVisualStyleBackColor = true;
+            this.chromRadioButton.CheckedChanged += new System.EventHandler(this.chromRadioButton_CheckedChanged);
             // 
-            // macroRadioButton
+            // countLabel
             // 
-            this.macroRadioButton.AutoSize = true;
-            this.macroRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.macroRadioButton.Location = new System.Drawing.Point(67, 90);
-            this.macroRadioButton.Name = "macroRadioButton";
-            this.macroRadioButton.Size = new System.Drawing.Size(192, 26);
-            this.macroRadioButton.TabIndex = 1;
-            this.macroRadioButton.TabStop = true;
-            this.macroRadioButton.Text = "Макро (сальтация)";
-            this.macroRadioButton.UseVisualStyleBackColor = true;
-            this.macroRadioButton.CheckedChanged += new System.EventHandler(this.macroRadioButton_CheckedChanged);
+            this.countLabel.AutoSize = true;
+            this.countLabel.Location = new System.Drawing.Point(43, 781);
+            this.countLabel.Name = "countLabel";
+            this.countLabel.Size = new System.Drawing.Size(161, 20);
+            this.countLabel.TabIndex = 9;
+            this.countLabel.Text = "Кол-во вычислений:";
             // 
-            // selectionGroupBox
+            // textBox1
             // 
-            this.selectionGroupBox.Controls.Add(this.radioButton3);
-            this.selectionGroupBox.Controls.Add(this.radioButton1);
-            this.selectionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.selectionGroupBox.Location = new System.Drawing.Point(29, 555);
-            this.selectionGroupBox.Name = "selectionGroupBox";
-            this.selectionGroupBox.Size = new System.Drawing.Size(327, 141);
-            this.selectionGroupBox.TabIndex = 8;
-            this.selectionGroupBox.TabStop = false;
-            this.selectionGroupBox.Text = "Селекция:";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton1.Location = new System.Drawing.Point(67, 41);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(137, 26);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton3.Location = new System.Drawing.Point(67, 91);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(137, 26);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(213, 778);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 26);
+            this.textBox1.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1206, 888);
+            this.ClientSize = new System.Drawing.Size(1206, 1011);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Эволюционно-генетический алгоритм";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.selectionGroupBox.ResumeLayout(false);
+            this.selectionGroupBox.PerformLayout();
             this.mutationGroupBox.ResumeLayout(false);
             this.mutationGroupBox.PerformLayout();
             this.crossoverGroupBox.ResumeLayout(false);
             this.crossoverGroupBox.PerformLayout();
             this.populationGroupBox.ResumeLayout(false);
             this.populationGroupBox.PerformLayout();
-            this.selectionGroupBox.ResumeLayout(false);
-            this.selectionGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -303,8 +338,11 @@
         private System.Windows.Forms.RadioButton macroRadioButton;
         private System.Windows.Forms.RadioButton genRadioButton;
         private System.Windows.Forms.GroupBox selectionGroupBox;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton proportionalRadioButton;
+        private System.Windows.Forms.RadioButton betaRadioButton;
+        private System.Windows.Forms.RadioButton chromRadioButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label countLabel;
     }
 }
 
