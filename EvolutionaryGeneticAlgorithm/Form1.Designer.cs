@@ -30,23 +30,22 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.countLabel = new System.Windows.Forms.Label();
             this.selectionGroupBox = new System.Windows.Forms.GroupBox();
             this.proportionalRadioButton = new System.Windows.Forms.RadioButton();
             this.betaRadioButton = new System.Windows.Forms.RadioButton();
             this.mutationGroupBox = new System.Windows.Forms.GroupBox();
+            this.chromRadioButton = new System.Windows.Forms.RadioButton();
             this.macroRadioButton = new System.Windows.Forms.RadioButton();
             this.genRadioButton = new System.Windows.Forms.RadioButton();
             this.Createbutton = new System.Windows.Forms.Button();
-            this.resetAllButton = new System.Windows.Forms.Button();
             this.crossoverGroupBox = new System.Windows.Forms.GroupBox();
             this.PMXradioButton = new System.Windows.Forms.RadioButton();
             this.OXradioButton = new System.Windows.Forms.RadioButton();
             this.populationGroupBox = new System.Windows.Forms.GroupBox();
             this.nearestCityRadioButton = new System.Windows.Forms.RadioButton();
             this.nearestNeighborRadioButton = new System.Windows.Forms.RadioButton();
-            this.chromRadioButton = new System.Windows.Forms.RadioButton();
-            this.countLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,7 +77,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.selectionGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.mutationGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.Createbutton);
-            this.splitContainer1.Panel2.Controls.Add(this.resetAllButton);
             this.splitContainer1.Panel2.Controls.Add(this.crossoverGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.populationGroupBox);
             this.splitContainer1.Size = new System.Drawing.Size(1206, 1011);
@@ -94,6 +92,22 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(783, 914);
             this.listBox1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(213, 778);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 26);
+            this.textBox1.TabIndex = 10;
+            // 
+            // countLabel
+            // 
+            this.countLabel.AutoSize = true;
+            this.countLabel.Location = new System.Drawing.Point(43, 781);
+            this.countLabel.Name = "countLabel";
+            this.countLabel.Size = new System.Drawing.Size(161, 20);
+            this.countLabel.TabIndex = 9;
+            this.countLabel.Text = "Кол-во вычислений:";
             // 
             // selectionGroupBox
             // 
@@ -144,6 +158,18 @@
             this.mutationGroupBox.TabStop = false;
             this.mutationGroupBox.Text = "Мутация:";
             // 
+            // chromRadioButton
+            // 
+            this.chromRadioButton.AutoSize = true;
+            this.chromRadioButton.Location = new System.Drawing.Point(67, 143);
+            this.chromRadioButton.Name = "chromRadioButton";
+            this.chromRadioButton.Size = new System.Drawing.Size(217, 26);
+            this.chromRadioButton.TabIndex = 2;
+            this.chromRadioButton.TabStop = true;
+            this.chromRadioButton.Text = "Хромосомная (м.Б.С)";
+            this.chromRadioButton.UseVisualStyleBackColor = true;
+            this.chromRadioButton.CheckedChanged += new System.EventHandler(this.chromRadioButton_CheckedChanged);
+            // 
             // macroRadioButton
             // 
             this.macroRadioButton.AutoSize = true;
@@ -180,17 +206,6 @@
             this.Createbutton.Text = "Создать";
             this.Createbutton.UseVisualStyleBackColor = true;
             this.Createbutton.Click += new System.EventHandler(this.Createbutton_Click);
-            // 
-            // resetAllButton
-            // 
-            this.resetAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.resetAllButton.Location = new System.Drawing.Point(126, 919);
-            this.resetAllButton.Name = "resetAllButton";
-            this.resetAllButton.Size = new System.Drawing.Size(143, 66);
-            this.resetAllButton.TabIndex = 5;
-            this.resetAllButton.Text = "Сбросить все";
-            this.resetAllButton.UseVisualStyleBackColor = true;
-            this.resetAllButton.Click += new System.EventHandler(this.resetAllButton_Click);
             // 
             // crossoverGroupBox
             // 
@@ -268,34 +283,6 @@
             this.nearestNeighborRadioButton.UseVisualStyleBackColor = true;
             this.nearestNeighborRadioButton.CheckedChanged += new System.EventHandler(this.nearestNeighborRadioButton_CheckedChanged);
             // 
-            // chromRadioButton
-            // 
-            this.chromRadioButton.AutoSize = true;
-            this.chromRadioButton.Location = new System.Drawing.Point(67, 143);
-            this.chromRadioButton.Name = "chromRadioButton";
-            this.chromRadioButton.Size = new System.Drawing.Size(217, 26);
-            this.chromRadioButton.TabIndex = 2;
-            this.chromRadioButton.TabStop = true;
-            this.chromRadioButton.Text = "Хромосомная (м.Б.С)";
-            this.chromRadioButton.UseVisualStyleBackColor = true;
-            this.chromRadioButton.CheckedChanged += new System.EventHandler(this.chromRadioButton_CheckedChanged);
-            // 
-            // countLabel
-            // 
-            this.countLabel.AutoSize = true;
-            this.countLabel.Location = new System.Drawing.Point(43, 781);
-            this.countLabel.Name = "countLabel";
-            this.countLabel.Size = new System.Drawing.Size(161, 20);
-            this.countLabel.TabIndex = 9;
-            this.countLabel.Text = "Кол-во вычислений:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(213, 778);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 26);
-            this.textBox1.TabIndex = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -330,7 +317,6 @@
         private System.Windows.Forms.RadioButton nearestNeighborRadioButton;
         private System.Windows.Forms.GroupBox crossoverGroupBox;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button resetAllButton;
         private System.Windows.Forms.RadioButton PMXradioButton;
         private System.Windows.Forms.RadioButton OXradioButton;
         private System.Windows.Forms.Button Createbutton;

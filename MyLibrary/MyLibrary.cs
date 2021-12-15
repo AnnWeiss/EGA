@@ -51,7 +51,7 @@ namespace MyProj
             probability[0] = (double)candidatesList[0].fitness / totalFitness;
             for (int i = 1; i < probability.Length; i++)
             {
-                probability[i] = (double)candidatesList[i].fitness / totalFitness + probability[i-1];
+                probability[i] = (double)candidatesList[i].fitness / totalFitness + probability[i - 1];
             }
             sigma = rnd.NextDouble();
             while (sigma == 0.0)
@@ -60,7 +60,10 @@ namespace MyProj
             }
             for (int j = 1; j < probability.Length; j++)
             {
-                //от минус первого до себя же
+                if (sigma > 0 && sigma <= probability[0])
+                {
+                    bestCandidate = candidatesList[0];
+                }
                 if (sigma > probability[j - 1] && sigma <= probability[j])
                 {
                     bestCandidate = candidatesList[j];

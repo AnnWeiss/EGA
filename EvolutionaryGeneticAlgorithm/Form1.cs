@@ -146,8 +146,7 @@ namespace EvolutionaryGeneticAlgorithm
                     candidateList2[i].encoding2 = MyLibrary.nearestNeighborsMethod(citiesList, Matrix2, rnd);
                 }
             }
-            //присвоение мутированным кодировкам приспособленности
-            setFitness(ref candidateList2);
+            setFitness(ref candidateList2);//присвоение мутированным кодировкам приспособленности
         }
         public void selection()
         {
@@ -186,28 +185,6 @@ namespace EvolutionaryGeneticAlgorithm
         {
 
         }
-        public void resetAll()
-        {
-            citiesList.Clear();
-            candidateList.Clear();
-            candidateList2.Clear();
-            nearestCityRadioButton.Checked = false;
-            nearestNeighborRadioButton.Checked = false;
-            OXradioButton.Checked = false;
-            PMXradioButton.Checked = false;
-            genRadioButton.Checked = false;
-            macroRadioButton.Checked = false;
-            chromRadioButton.Checked = false;
-            betaRadioButton.Checked = false;
-            proportionalRadioButton.Checked = false;
-            listBox1.Items.Clear();
-            numberOfGeneration = 0;
-        }
-
-        private void resetAllButton_Click(object sender, EventArgs e)
-        {
-            resetAll();
-        }
 
         private void OXradioButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -221,6 +198,11 @@ namespace EvolutionaryGeneticAlgorithm
 
         private void Createbutton_Click(object sender, EventArgs e)
         {
+            citiesList.Clear();
+            candidateList.Clear();
+            candidateList2.Clear();
+            listBox1.Items.Clear();
+            numberOfGeneration = 0;
             codingSolutions();
             while (numberOfGeneration < Convert.ToInt32(textBox1.Text))
             {
