@@ -38,9 +38,34 @@ namespace MyProj
     }
     public static class MyLibrary
     {
-        public static Candidate proportionalTournament(List<Candidate> candidatesList, Random rnd, List<Candidate> alreadyAddedCandidates)
+        public static Candidate proportionalTournament(List<Candidate> candidatesList, Random rnd)
         {
             Candidate bestCandidate = new Candidate();
+            double sigma;//случ.величина
+            double totalFitness = 0;
+            for (int i = 0; i < candidatesList.Count; i++)
+            {
+                totalFitness += candidatesList[i].fitness;
+            }
+            double[] probability = new double[candidatesList.Count];
+            probability[0] = (double)candidatesList[0].fitness / totalFitness;
+            for (int i = 1; i < probability.Length; i++)
+            {
+                probability[i] = (double)candidatesList[i].fitness / totalFitness + probability[i-1];
+            }
+            sigma = rnd.NextDouble();
+            while (sigma == 0.0)
+            {
+                sigma = rnd.NextDouble();
+            }
+            for (int j = 1; j < probability.Length; j++)
+            {
+                //от минус первого до себя же
+                if (sigma > probability[j - 1] && sigma <= probability[j])
+                {
+                    bestCandidate = candidatesList[j];
+                }
+            }
             return bestCandidate;
         }
         public static Candidate betaTournament(List<Candidate> candidatesList, Random rnd, List<Candidate> alreadyAddedCandidates)

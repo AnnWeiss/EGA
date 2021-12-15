@@ -162,7 +162,11 @@ namespace EvolutionaryGeneticAlgorithm
             }
             if (proportionalRadioButton.Checked)
             {
-
+                for (int i = 0; i < 10; i++)
+                {
+                    candidateList.Add(MyLibrary.proportionalTournament(candidateList2, rnd));
+                }
+                candidateList2.Clear();
             }
         }
         public void printPopulationToListBox(List<Candidate> candList)
