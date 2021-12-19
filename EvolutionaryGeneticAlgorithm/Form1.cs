@@ -125,25 +125,50 @@ namespace EvolutionaryGeneticAlgorithm
         }
         public void mutation()
         {
+            double prob; //если вероятность много меньше единицы, то мутируем
             if (genRadioButton.Checked)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    candidateList2[i] = MyLibrary.genMutation(candidateList2[i], rnd);
+                    prob = rnd.NextDouble();
+                    if (prob < 0.2)
+                    {
+                        candidateList2[i] = MyLibrary.genMutation(candidateList2[i], rnd);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             if (macroRadioButton.Checked)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    candidateList2[i] = MyLibrary.macroMutation(candidateList2[i], rnd);
+                    prob = rnd.NextDouble();
+                    if (prob < 0.2)
+                    {
+                        candidateList2[i] = MyLibrary.macroMutation(candidateList2[i], rnd);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             if (chromRadioButton.Checked)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    candidateList2[i].encoding2 = MyLibrary.nearestNeighborsMethod(citiesList, Matrix2, rnd);
+                    prob = rnd.NextDouble();
+                    if (prob < 0.2)
+                    {
+                        candidateList2[i].encoding2 = MyLibrary.nearestNeighborsMethod(citiesList, Matrix2, rnd);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             setFitness(ref candidateList2);//присвоение мутированным кодировкам приспособленности
