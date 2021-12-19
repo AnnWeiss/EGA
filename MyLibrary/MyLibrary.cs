@@ -125,6 +125,10 @@ namespace MyProj
         {
             int firstParent = rnd.Next(0, candidatesList.Count);
             int secondParent = rnd.Next(0, candidatesList.Count);
+            while(firstParent == secondParent)
+            {
+                secondParent = rnd.Next(0, candidatesList.Count);
+            }
             int firstSection = rnd.Next(1, candidatesList.Count-2);
             int secondSection = rnd.Next(firstSection, candidatesList.Count-1);
             List<int> firstblock = new List<int>();//таблица отображений
@@ -226,6 +230,10 @@ namespace MyProj
         {
             int firstParent = rnd.Next(0, candidatesList.Count);
             int secondParent = rnd.Next(0, candidatesList.Count);
+            while (firstParent == secondParent)
+            {
+                secondParent = rnd.Next(0, candidatesList.Count);
+            }
             int firstSection = rnd.Next(1, candidatesList.Count-2);
             int secondSection = rnd.Next(firstSection, candidatesList.Count-1);
             List<int> fillerblock = new List<int>();
