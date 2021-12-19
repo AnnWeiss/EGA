@@ -175,6 +175,17 @@ namespace EvolutionaryGeneticAlgorithm
             {
                 listBox1.Items.Add(string.Join(" ", candList[i].encoding2)+"\t"+ string.Join(" ", candList[i].fitness));
             }
+            int idx = 0;
+            for (int i = 1; i < candList.Count; i++)
+            {
+                if (candList[i].fitness > candList[idx].fitness)
+                {
+                    idx = i;
+                }
+            }
+            listBox1.Items.Add("Наилучшая особь:");
+            listBox1.Items.Add(string.Join(" ", candList[idx].encoding2) + "\t" + string.Join(" ", candList[idx].fitness));
+            listBox1.Items.Add("\n");
         }
         private void nearestNeighborRadioButton_CheckedChanged(object sender, EventArgs e)
         {
