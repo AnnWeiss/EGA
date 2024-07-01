@@ -209,7 +209,7 @@ namespace EvolutionaryGeneticAlgorithm
                 }
             }
             listBox1.Items.Add("Наилучшая особь:");
-            listBox1.Items.Add(string.Join(" ", candList[idx].encoding2) + "\t" + string.Join(" ", candList[idx].fitness));
+            listBox1.Items.Add(string.Join(" ", candList[idx].encoding2) + "\t" + string.Join(" ", candList[idx].totalDistance));
             listBox1.Items.Add("\n");
         }
         private void nearestNeighborRadioButton_CheckedChanged(object sender, EventArgs e)
